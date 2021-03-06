@@ -37,8 +37,8 @@ services:
     build:
       context: docker/php/service_a
       args:
-        - PUID=1001
-        - PGID=1001
+        - PUID=${PUID}
+        - PGID=${PGID}
     volumes:
       - ./src/service_a:/var/www/html
     depends_on:
@@ -50,12 +50,26 @@ services:
     build:
       context: docker/php/service_b
       args:
-        - PUID=1001
-        - PGID=1001
+        - PUID=${PUID}
+        - PGID=${PGID}
     volumes:
       - ./src/service_b:/var/www/html
     depends_on:
       - kafka
+    networks:
+      - hp
+
+  broker:
+    build:
+      context: docker/php/broker
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ./src/broker:/var/www/html
+    depends_on:
+      - kafka
+      - db
     networks:
       - hp
 
