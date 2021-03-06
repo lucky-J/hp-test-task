@@ -2,6 +2,8 @@ FROM luckyj/php-7.4-kafka:latest
 
 RUN apt-get update \
     && apt-get install -y \
+    zip \
+    unzip \
     libssl-dev \
     libpq-dev
 

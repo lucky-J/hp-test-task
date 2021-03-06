@@ -1,0 +1,26 @@
+{
+    "name": "darkdante/broker",
+    "description": "Pet project. Proxy broker.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Maksimov",
+            "email": "senior.sensei.dev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-rdkafka": "*",
+        "illuminate/database": "^v8.31.0"
+    },
+    "require-dev": {
+        "kwn/php-rdkafka-stubs": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
