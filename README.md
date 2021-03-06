@@ -12,17 +12,17 @@ docker-compose up -d && docker-compose logs -f
 * [ ] Environment
     * [x] docker-compose 3.7
     * [x] postgres 10
-    * [ ] kafka 2.12
+    * [x] kafka 2.12
     * [ ] php 7.4
 * [ ] Infrastructure(docker-compose based)
-    * [ ] zookeeper
-    * [ ] kafka cluster
+    * [x] zookeeper
+    * [x] kafka cluster
     * [x] postgresql
     * [ ] Broker service
-    * [ ] Service A(name appender)
+    * [x] Service A(name appender)
     * [ ] Service B(bye appender)
     * [ ] Requester service
-    * [x] DB Migration service. init.sql
+    * [x] DB Migration. init.sql
 * [ ] Services logic
   * [ ] Requester service
     * [ ] Sends "Hi" message to the broker service

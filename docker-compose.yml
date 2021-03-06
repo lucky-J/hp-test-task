@@ -33,6 +33,32 @@ services:
     networks:
       - hp
 
+  service-a:
+    build:
+      context: docker/php/service_a
+      args:
+        - PUID=1001
+        - PGID=1001
+    volumes:
+      - ./src/service_a:/var/www/html
+    depends_on:
+      - kafka
+    networks:
+      - hp
+
+  service-b:
+    build:
+      context: docker/php/service_b
+      args:
+        - PUID=1001
+        - PGID=1001
+    volumes:
+      - ./src/service_b:/var/www/html
+    depends_on:
+      - kafka
+    networks:
+      - hp
+
 networks:
   hp:
     driver: bridge

@@ -1,0 +1,14 @@
+FROM luckyj/php-7.4-kafka:latest
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Add user with correct gid and uid
+ARG PUID
+ARG PGID
+RUN groupadd -g ${PGID} printherro && \
+    useradd -u ${PUID} -g printherro -s /bin/bash -m printherro
+
+USER printherro
+
+WORKDIR /var/www/html
