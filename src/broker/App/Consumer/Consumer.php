@@ -7,6 +7,7 @@ namespace App\Consumer;
 use App\Exception\RdKafkaRuntimeException;
 use App\Model\Kafka\SimpleMessage;
 use RdKafka\ConsumerTopic;
+use Throwable;
 
 class Consumer implements ConsumerInterface
 {
@@ -33,7 +34,7 @@ class Consumer implements ConsumerInterface
 
                 echo $simpleMessage->getMessage(). PHP_EOL;
             }
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             throw new RdKafkaRuntimeException('Consuming failed', 500, $exception);
         }
     }

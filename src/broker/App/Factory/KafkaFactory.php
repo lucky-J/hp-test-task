@@ -29,7 +29,7 @@ class KafkaFactory
     public static function createConsumer(array $config, string $consumerName): ConsumerInterface
     {
         $consumerRawConf = $config['consumers'][$consumerName];
-        $consumerConf =new \RdKafka\Conf();
+        $consumerConf =new Conf();
         $consumerConf->set('metadata.broker.list', implode(', ', $config['connection']['hosts']));
         $consumerConf->set('group.id', $consumerRawConf['group_id']);
 

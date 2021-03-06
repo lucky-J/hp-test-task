@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Producer\Producer;
-use App\Producer\ProducerInterface;
 use DI\Container;
 use DI\ContainerBuilder;
-use DI\Definition\Reference;
 use Dotenv\Dotenv;
-use JMS\Serializer\Serializer;
-use function DI\autowire;
-use function DI\create;
-use function DI\factory;
-use function DI\get;
+use Exception;
 
 class App
 {
@@ -42,17 +35,16 @@ class App
         $definitionsSources = [
             require_once('./config/database.php'),
             require_once('./config/kafka.php'),
+            require_once('./config/services.php')
         ];
 
         foreach ($definitionsSources as $definitions) {
             $containerBuilder->addDefinitions($definitions);
         }
 
-        require_once('./config/services.php');
-
         try {
             $this->container = $containerBuilder->build();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage() . PHP_EOL;
             exit(1);
         }

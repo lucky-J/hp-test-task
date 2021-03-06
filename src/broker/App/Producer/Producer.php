@@ -8,6 +8,8 @@ use App\Exception\RdKafkaRuntimeException;
 use App\Model\Kafka\MessageInterface;
 use RdKafka\Producer as VendorProducer;
 use RdKafka\ProducerTopic;
+use RuntimeException;
+use Throwable;
 
 class Producer implements ProducerInterface
 {
@@ -41,9 +43,9 @@ class Producer implements ProducerInterface
             }
 
             if (RD_KAFKA_RESP_ERR_NO_ERROR !== $result) {
-                throw new \RuntimeException('Was unable to flush, messages might be lost!');
+                throw new RuntimeException('Was unable to flush, messages might be lost!');
             }
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             throw new RdKafkaRuntimeException('Publish failed', 500, $exception);
         }
     }
