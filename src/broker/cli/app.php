@@ -1,15 +1,25 @@
 <?php
 
+use App\Command\CommandHandler;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = App\App::make();
 
-$repository = $app->getContainer()->get(\App\Repository\RequestRepository::class);
-$id = $repository->getRequestMessageById(1);
-var_dump($id);
+$handler = CommandHandler::make($app->getContainer());
+if ($argc < 2) {
+    $handler->handle('list', $argv);
+    return;
+}
 
-$producerA = $app->getContainer()->get('producerA');
-$producerA->publish(new \App\Model\Kafka\SimpleMessage(1, 'Hi'));
+list(, $command) = $argv;
+$withArgs = false;
+if ($argc > 2) {
+    $withArgs = true;
+    array_shift($argv);
+    array_shift($argv);
+}
 
-$consumerA = $app->getContainer()->get('consumerA');
-$consumerA->consume();
+$handler->handle($command, $argv);
+
+return;
