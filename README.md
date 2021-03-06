@@ -10,22 +10,20 @@ docker-compose up -d && docker-compose logs -f
 ## todo list
 
 * [ ] Environment
-    * [ ] docker 3.7
-    * [ ] postgres 10
+    * [x] docker-compose 3.7
+    * [x] postgres 10
     * [ ] kafka 2.12
     * [ ] php 7.4
 * [ ] Infrastructure(docker-compose based)
     * [ ] zookeeper
     * [ ] kafka cluster
-    * [ ] postgresql
+    * [x] postgresql
     * [ ] Broker service
     * [ ] Service A(name appender)
     * [ ] Service B(bye appender)
     * [ ] Requester service
-    * [ ] DB Migration service. Flyway
-* Services logic
-  * [ ] Flyway
-    * [ ] Run migration. Create a table named "request" under "Broker" schema
+    * [x] DB Migration service. init.sql
+* [ ] Services logic
   * [ ] Requester service
     * [ ] Sends "Hi" message to the broker service
     * [ ] Response wait interval 50ms - 1s. Unique identifier as the response payload
