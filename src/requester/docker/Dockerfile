@@ -4,7 +4,8 @@ RUN apt-get update \
     && apt-get install -y \
     zip \
     unzip \
-    libssl-dev
+    libssl-dev \
+    vim
 
 # Install php extensions
 RUN docker-php-ext-install \

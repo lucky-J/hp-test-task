@@ -13,6 +13,9 @@ if (isset($_GET['message']) && $_GET['message'] === 'Hi') {
     }
     send(['id' => $id], 202);
 
+    /** @var \App\Producer\ProducerInterface $producer */
+    $producer = $app->getContainer()->get('producerA');
+    $producer->publish(new \App\Model\Kafka\SimpleMessage($id, $_GET['message']));
     return;
 }
 
