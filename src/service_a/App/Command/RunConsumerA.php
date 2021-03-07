@@ -10,7 +10,7 @@ class RunConsumerA extends Command
 {
     private ConsumerInterface $consumer;
     protected static string $name = 'consumer:listen:topicA';
-    protected static string $description = 'Publishes message to the kafka Topic A';
+    protected static string $description = 'Executes ConsumerA';
 
     public function __construct(ConsumerInterface $consumer)
     {
