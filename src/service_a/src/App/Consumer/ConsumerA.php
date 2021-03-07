@@ -21,7 +21,7 @@ class ConsumerA extends Consumer
     function onConsume(MessageInterface $message): void
     {
         if ($message->getMessage() !== 'Hi') {
-            echo 'Invalid message payload' . PHP_EOL;
+            echo 'Invalid message payload. Payload: ' . $message->getMessage() . PHP_EOL;
             return;
         }
 

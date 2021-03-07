@@ -8,7 +8,7 @@ docker-compose up -d && docker-compose logs -f
 ```
 
 ## todo list
-
+* [ ] improve consumers. set offset to avoid message duplication 
 * [ ] Environment
     * [x] docker-compose 3.7
     * [x] postgres 10
@@ -23,7 +23,7 @@ docker-compose up -d && docker-compose logs -f
     * [x] Service B(bye appender)
     * [ ] Requester service
     * [x] DB Migration. init.sql
-    * [ ] Add `composer install` to the services Dockerfile
+    * [x] Add `composer install` to the services Dockerfile
 * [ ] Services logic
   * [ ] Requester service
     * [ ] Sends "Hi" message to the broker service

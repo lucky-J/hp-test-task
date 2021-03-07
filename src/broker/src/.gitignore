@@ -1,4 +1,4 @@
 .env
-.idea/
+src/.idea/
 vendor/
 composer.lock

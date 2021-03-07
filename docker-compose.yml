@@ -35,12 +35,11 @@ services:
 
   service-a:
     build:
-      context: docker/php/service_a
+      context: src/service_a
+      dockerfile: docker/Dockerfile
       args:
         - PUID=${PUID}
         - PGID=${PGID}
-    volumes:
-      - ./src/service_a:/var/www/html
     depends_on:
       - kafka
     networks:
@@ -48,12 +47,11 @@ services:
 
   service-b:
     build:
-      context: docker/php/service_b
+      context: src/service_b
+      dockerfile: docker/Dockerfile
       args:
         - PUID=${PUID}
         - PGID=${PGID}
-    volumes:
-      - ./src/service_b:/var/www/html
     depends_on:
       - kafka
     networks:
@@ -61,12 +59,11 @@ services:
 
   broker:
     build:
-      context: docker/php/broker
+      context: src/broker
+      dockerfile: docker/Dockerfile
       args:
         - PUID=${PUID}
         - PGID=${PGID}
-    volumes:
-      - ./src/broker:/var/www/html
     depends_on:
       - kafka
       - db

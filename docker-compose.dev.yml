@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  service-a:
+    build:
+      context: src/service_a
+      dockerfile: docker/Dockerfile.dev
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ./src/service_a:/var/www/html
+    depends_on:
+      - kafka
+    networks:
+      - hp
+
+  service-b:
+    build:
+      context: src/service_b
+      dockerfile: docker/Dockerfile.dev
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ./src/service_b:/var/www/html
+    depends_on:
+      - kafka
+    networks:
+      - hp
+
+  broker:
+    build:
+      context: src/broker
+      dockerfile: docker/Dockerfile.dev
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ./src/broker:/var/www/html
+    depends_on:
+      - kafka
+      - db
+    networks:
+      - hp
