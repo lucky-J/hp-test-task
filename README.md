@@ -105,7 +105,7 @@ root@cfa532390b82:/var/www/html#
     * [x] Sends the message from Service A to the Topic B
     * [x] Waiting for the message from Service B
     * [x] Stores full message into db under unique identifier. Schema "Broker", table "request"
-    * [ ] Returns full message to the client
+    * [x] Returns full message to the client
   * [x] Service A
     * [x] Listens Topic A
     * [x] Validate incoming message
