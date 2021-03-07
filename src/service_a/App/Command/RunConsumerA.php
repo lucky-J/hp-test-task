@@ -9,7 +9,7 @@ use App\Consumer\ConsumerInterface;
 class RunConsumerA extends Command
 {
     private ConsumerInterface $consumer;
-    protected static string $name = 'consumer:listen:topicA';
+    protected static string $name = 'consumer:listen';
     protected static string $description = 'Executes ConsumerA';
 
     public function __construct(ConsumerInterface $consumer)
