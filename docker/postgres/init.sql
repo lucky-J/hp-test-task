@@ -90,7 +90,6 @@ ALTER TABLE ONLY "Broker".request ALTER COLUMN id SET DEFAULT nextval('"Broker".
 --
 
 COPY "Broker".request (id, message, modified_at) FROM stdin;
-\.
 
 
 --
@@ -111,4 +110,7 @@ ALTER TABLE ONLY "Broker".request
 --
 -- PostgreSQL database dump complete
 --
+
+alter table "Broker".request
+    add is_complete bool default false not null;
 

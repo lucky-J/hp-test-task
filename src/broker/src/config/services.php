@@ -14,7 +14,7 @@ return [
         DI\get('producerB')
     ),
     'consumerB' => DI\create(Consumer\ConsumerB::class)->constructor(
-        DI\factory([Factory\KafkaFactory::class, 'createConsumerTopic'])->parameter('config', DI\get('kafka'))->parameter('consumerName', 'consumerRevA'),
+        DI\factory([Factory\KafkaFactory::class, 'createConsumerTopic'])->parameter('config', DI\get('kafka'))->parameter('consumerName', 'consumerRevB'),
         DI\get(RequestRepository::class)
     ),
     'db.connection' => DI\factory([Factory\DbConnectionFactory::class, 'create'])->parameter('config', DI\get('database')),

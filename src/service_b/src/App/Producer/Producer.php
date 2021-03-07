@@ -28,6 +28,7 @@ class Producer implements ProducerInterface
 
     public function publish(MessageInterface $message): void
     {
+        echo $message->getMessage() . PHP_EOL;
         try {
             foreach ($this->topics as $topic) {
                 $topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($message));

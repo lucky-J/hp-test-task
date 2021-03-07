@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Consumer;
 
 use App\Model\Kafka\MessageInterface;
-use App\Producer\ProducerInterface;
 use App\Repository\RepositoryInterface;
 use App\Repository\RequestRepository;
 use RdKafka\ConsumerTopic;
+use Throwable;
 
 class ConsumerB extends Consumer
 {
@@ -26,8 +26,9 @@ class ConsumerB extends Consumer
     function onConsume(MessageInterface $message): void
     {
         try {
+            echo $message->getMessage() . PHP_EOL;
             $this->repository->updateRequest($message->getId(), $message->getMessage(), true);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             echo $exception->getMessage() . PHP_EOL;
         }
     }

@@ -1,10 +1,14 @@
 <?php
 
+use App\Model\Kafka\SimpleMessage;
+use App\Producer\ProducerInterface;
+use App\Repository\RequestRepository;
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 $app = App\App::make();
 
-$repository = $app->getContainer()->get(\App\Repository\RequestRepository::class);
+$repository = $app->getContainer()->get(RequestRepository::class);
 
 if (isset($_GET['message']) && $_GET['message'] === 'Hi') {
     $id = $repository->storeRequest($_GET['message']);
@@ -13,28 +17,32 @@ if (isset($_GET['message']) && $_GET['message'] === 'Hi') {
     }
     send(['id' => $id], 202);
 
-    /** @var \App\Producer\ProducerInterface $producer */
+    /** @var ProducerInterface $producer */
     $producer = $app->getContainer()->get('producerA');
-    $producer->publish(new \App\Model\Kafka\SimpleMessage($id, $_GET['message']));
+    $producer->publish(new SimpleMessage($id, $_GET['message']));
     return;
 }
 
 if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] !== 0) {
     $retries = 0;
     $retriesMax = 3;
-    $retryDelay = 0.5;
+    $retryDelay = 1;
     $result = [];
     while ($retries < $retriesMax) {
         $record = $repository->getRequestRecordById($_GET['id']);
         if (isset($record['is_complete']) && $record['is_complete'] === true) {
+            $result = $record;
             break;
         }
 
         $retries++;
         sleep($retryDelay);
     }
-    send(['message' =>  $result['message']]);
-    return;
+    if (empty($result)) {
+        send('Too slow', 404);
+    } else {
+        send(['message' =>  $result['message']]);
+    }
 }
 
 function send($content, int $responseCode = 200)
@@ -47,7 +55,7 @@ function send($content, int $responseCode = 200)
         echo json_encode($content);
     }
 
-    if (\function_exists('fastcgi_finish_request')) {
+    if (function_exists('fastcgi_finish_request')) {
         fastcgi_finish_request();
     }
 }
