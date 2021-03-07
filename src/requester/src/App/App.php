@@ -6,20 +6,14 @@ namespace App;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use Dotenv\Dotenv;
 use Exception;
 
 class App
 {
-    private Dotenv $env;
-
     private Container $container;
 
     public function __construct()
     {
-        $this->env = Dotenv::createImmutable(['./', '../']);
-        $this->env->load();
-
         $this->buildDefinitions();
     }
 
@@ -32,13 +26,11 @@ class App
     {
         $containerBuilder = new ContainerBuilder();
 
-        $definitionsSources = [
-            require_once('./config/database.php'),
-            require_once('./config/kafka.php'),
+        $definitionSources = [
             require_once('./config/services.php')
         ];
 
-        foreach ($definitionsSources as $definitions) {
+        foreach ($definitionSources as $definitions) {
             $containerBuilder->addDefinitions($definitions);
         }
 
@@ -53,13 +45,5 @@ class App
     public function getContainer(): Container
     {
         return $this->container;
-    }
-
-    public static function env($key, $default)
-    {
-        $env = Dotenv::createImmutable('./');
-        $env->load();
-
-        return $_ENV[$key] ?? $default;
     }
 }

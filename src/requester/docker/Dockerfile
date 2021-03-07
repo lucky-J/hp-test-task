@@ -4,14 +4,10 @@ RUN apt-get update \
     && apt-get install -y \
     zip \
     unzip \
-    libssl-dev \
-    libpq-dev
+    libssl-dev
 
 # Install php extensions
 RUN docker-php-ext-install \
-    pdo \
-    pgsql \
-    pdo_pgsql \
     opcache
 
 # Install composer
@@ -23,6 +19,10 @@ ARG PGID
 RUN groupadd -g ${PGID} printherro && \
     useradd -u ${PUID} -g printherro -s /bin/bash -m printherro
 
-USER printherro
+ADD ./src /var/www/html
 
 WORKDIR /var/www/html
+
+USER printherro
+
+RUN composer install -n -o

@@ -21,17 +21,18 @@ class RequestRepository implements RepositoryInterface
 
     /**
      * @param int $id
-     * @return string
+     * @return array
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      */
-    public function getRequestMessageById(int $id): string
+    public function getRequestRecordById(int $id): array
     {
-        $sql = 'SELECT message FROM "Broker".request WHERE id = ?';
+        $sql = 'SELECT * FROM "Broker".request WHERE id = ?';
             $stmt = $this->connection->prepare($sql);
             $stmt->bindValue(1, $id);
-            $res = $stmt->execute()->fetchOne();
-            return $res ?? '';
+            $res = $stmt->execute()->fetchAssociative();
+
+            return $res ?? [];
     }
 
     public function storeRequest(string $message): int

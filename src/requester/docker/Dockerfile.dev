@@ -23,6 +23,8 @@ ARG PGID
 RUN groupadd -g ${PGID} printherro && \
     useradd -u ${PUID} -g printherro -s /bin/bash -m printherro
 
+ADD ./src /var/www/html
+
 USER printherro
 
 WORKDIR /var/www/html

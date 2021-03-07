@@ -23,6 +23,10 @@ ARG PGID
 RUN groupadd -g ${PGID} printherro && \
     useradd -u ${PUID} -g printherro -s /bin/bash -m printherro
 
-USER printherro
+ADD ./src /var/www/html
 
 WORKDIR /var/www/html
+
+USER printherro
+
+RUN composer install -n -o

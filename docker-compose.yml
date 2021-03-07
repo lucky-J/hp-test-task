@@ -72,6 +72,31 @@ services:
     networks:
       - hp
 
+  requester:
+    build:
+      context: src/requester
+      dockerfile: docker/Dockerfile
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    depends_on:
+      - broker
+      - nginx
+    networks:
+      - hp
+
+  nginx:
+    image: nginx:1.11-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./src/broker/src:/var/www/html
+    depends_on:
+      - broker
+    networks:
+      - hp
+
 networks:
   hp:
     driver: bridge

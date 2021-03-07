@@ -1,0 +1,27 @@
+{
+    "name": "darkdante/requester",
+    "description": "Pet project. Emulates client",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Maksimov",
+            "email": "senior.sensei.dev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "php": "^7.4",
+        "php-di/php-di": "dev-master",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "require-dev": {
+        "kwn/php-rdkafka-stubs": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
