@@ -26,6 +26,10 @@ abstract class Consumer implements ConsumerInterface
 
             while (true) {
                 $message = $this->consumerTopic->consume(0, 120*1000);
+                if (!$message) {
+                    continue;
+                }
+
                 $arr = json_decode($message->payload, true);
                 if (!$arr) {
                     continue;

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Consumer\Consumer;
-use App\Consumer\ConsumerInterface;
 use App\Producer\Producer;
 use App\Producer\ProducerInterface;
 use RdKafka\Conf;

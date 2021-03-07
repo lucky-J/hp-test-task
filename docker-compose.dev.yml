@@ -9,7 +9,7 @@ services:
         - PUID=${PUID}
         - PGID=${PGID}
     volumes:
-      - ./src/service_a:/var/www/html
+      - ./src/service_a/src:/var/www/html
     depends_on:
       - kafka
     networks:
@@ -23,7 +23,7 @@ services:
         - PUID=${PUID}
         - PGID=${PGID}
     volumes:
-      - ./src/service_b:/var/www/html
+      - ./src/service_b/src:/var/www/html
     depends_on:
       - kafka
     networks:
@@ -37,7 +37,7 @@ services:
         - PUID=${PUID}
         - PGID=${PGID}
     volumes:
-      - ./src/broker:/var/www/html
+      - ./src/broker/src:/var/www/html
     depends_on:
       - kafka
       - db

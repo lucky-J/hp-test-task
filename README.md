@@ -8,7 +8,6 @@ docker-compose up -d && docker-compose logs -f
 ```
 
 ## todo list
-* [ ] improve consumers. set offset to avoid message duplication 
 * [ ] Environment
     * [x] docker-compose 3.7
     * [x] postgres 10
