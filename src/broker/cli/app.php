@@ -13,11 +13,8 @@ if ($argc < 2) {
 }
 
 list(, $command) = $argv;
-$withArgs = false;
 if ($argc > 2) {
-    $withArgs = true;
-    array_shift($argv);
-    array_shift($argv);
+    $argv = array_slice($argv, 0, 2);
 }
 
 $handler->handle($command, $argv);
