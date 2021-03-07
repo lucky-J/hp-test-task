@@ -1,0 +1,27 @@
+{
+    "name": "darkdante/service_a",
+    "description": "Pet project. Appends received message from TopicA with a random name and sends it to the TopicB",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pavel Maksimov",
+            "email": "senior.sensei.dev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "require": {
+        "php": "^7.4",
+        "ext-rdkafka": "*",
+        "php-di/php-di": "dev-master",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "kwn/php-rdkafka-stubs": "dev-master"
+    },
+    "minimum-stability": "dev"
+}

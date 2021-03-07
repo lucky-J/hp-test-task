@@ -39,11 +39,13 @@ docker-compose up -d && docker-compose logs -f
     * [x] Waiting for the message from Service B
     * [x] Stores full message into db under unique identifier. Schema "Broker", table "request"
     * [ ] Returns full message to the client
-  * [ ] Service A
-    * [ ] Listens Topic A
-    * [ ] Adds a random name. List of names: Joao, Bram, Gabriel, Fehim, Eni, Patrick, Micha, Mirzet, Liliana, Sebastien.
-    * [ ] Sends a changed message to the Broker service
-  * [ ] Service B
-    * [ ] Listens Topic B
-    * [ ] Appends the word "Bye" to the received message.
-    * [ ] Sends full message to the Broker service
+  * [x] Service A
+    * [x] Listens Topic A
+    * [x] Validate incoming message
+    * [x] Adds a random name. List of names: Joao, Bram, Gabriel, Fehim, Eni, Patrick, Micha, Mirzet, Liliana, Sebastien.
+    * [x] Sends a changed message to the Broker service
+  * [x] Service B
+    * [x] Listens Topic B
+    * [x] Validate incoming message
+    * [x] Appends the word "Bye" to the received message.
+    * [x] Sends full message to the Broker service
