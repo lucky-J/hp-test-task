@@ -23,6 +23,7 @@ docker-compose up -d && docker-compose logs -f
     * [x] Service B(bye appender)
     * [ ] Requester service
     * [x] DB Migration. init.sql
+    * [ ] Add `composer install` to the services Dockerfile
 * [ ] Services logic
   * [ ] Requester service
     * [ ] Sends "Hi" message to the broker service
@@ -30,13 +31,14 @@ docker-compose up -d && docker-compose logs -f
     * [ ] Prints the final message. Should be like {Hi} {First name} {Bye} 
   * [ ] Broker service
     * [ ] Listens for "Hi" message from the Requester
-    * [ ] Stores "Hi" into db. Schema "Broker", table "request"
+    * [x] Stores "Hi" into db. Schema "Broker", table "request"
     * [ ] Returns identifier to the requester
     * [x] Produces message to the kafkas' topic A
-    * [ ] Waiting for the message from Service A
-    * [ ] Sends the message from Service A to the Topic B*
-    * [ ] Waiting for the message from Service B
-    * [ ] Stores full message into db under unique identifier. Schema "Broker", table "request"
+    * [x] Waiting for the message from Service A
+    * [x] Sends the message from Service A to the Topic B
+    * [x] Waiting for the message from Service B
+    * [x] Stores full message into db under unique identifier. Schema "Broker", table "request"
+    * [ ] Returns full message to the client
   * [ ] Service A
     * [ ] Listens Topic A
     * [ ] Adds a random name. List of names: Joao, Bram, Gabriel, Fehim, Eni, Patrick, Micha, Mirzet, Liliana, Sebastien.

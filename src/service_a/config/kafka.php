@@ -8,15 +8,8 @@ return [
             ]
         ],
         'consumers'  => [
-            'consumerRevA' => [
-                'topic' => 'TopicRevA',
-                'group_id' => uniqid(),
-                'auto_commit_timeout' => '100',
-                'offset_store_method' => 'broker',
-                'auto_reset_offset' => 'earliest'
-            ],
-            'consumerRevB' => [
-                'topic' => 'TopicRevB',
+            'consumerA' => [
+                'topic' => 'TopicA',
                 'group_id' => uniqid(),
                 'auto_commit_timeout' => '100',
                 'offset_store_method' => 'broker',
@@ -26,12 +19,7 @@ return [
         'producers'  => [
             'producerA' => [
                 'topics' => [
-                    'TopicA',
-                ]
-            ],
-            'producerB' => [
-                'topics' => [
-                    'TopicB',
+                    'TopicRevA',
                 ]
             ],
         ],
