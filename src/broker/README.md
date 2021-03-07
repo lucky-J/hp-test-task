@@ -33,7 +33,7 @@ Application has 2 producers:
 * ProducerA - sends a message to the TopicA
 * ProducerB - sends a message to the TopicB
 
-Usage example
+Code usage example
 ```php
 $app = \App\App::make();
 $producer = $app->getContainer()->get('producerA');
