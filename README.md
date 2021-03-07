@@ -32,7 +32,7 @@ docker-compose up -d && docker-compose logs -f
     * [ ] Listens for "Hi" message from the Requester
     * [ ] Stores "Hi" into db. Schema "Broker", table "request"
     * [ ] Returns identifier to the requester
-    * [ ] Produces message to the kafkas' topic A
+    * [x] Produces message to the kafkas' topic A
     * [ ] Waiting for the message from Service A
     * [ ] Sends the message from Service A to the Topic B*
     * [ ] Waiting for the message from Service B

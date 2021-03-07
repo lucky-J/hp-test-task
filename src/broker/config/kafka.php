@@ -9,15 +9,15 @@ return [
         ],
         'consumers'  => [
             'consumerRevA' => [
-                'topic' => 'TopicRevA',
-                'group_id' => 'testgroup',
+                'topic' => 'TopicA',
+                'group_id' => uniqid(),
                 'auto_commit_timeout' => '100',
                 'offset_store_method' => 'broker',
                 'auto_reset_offset' => 'earliest'
             ],
             'consumerRevB' => [
                 'topic' => 'TopicRevB',
-                'group_id' => 'testgroup',
+                'group_id' => uniqid(),
                 'auto_commit_timeout' => '100',
                 'offset_store_method' => 'broker',
                 'auto_reset_offset' => 'earliest'
