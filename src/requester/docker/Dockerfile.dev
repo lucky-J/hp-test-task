@@ -20,11 +20,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Add user with correct gid and uid
 ARG PUID
 ARG PGID
-RUN groupadd -g ${PGID} printherro && \
-    useradd -u ${PUID} -g printherro -s /bin/bash -m printherro
+RUN groupadd -g ${PGID} printhero && \
+    useradd -u ${PUID} -g printhero -s /bin/bash -m printhero
 
 ADD ./src /var/www/html
 
-USER printherro
+USER printhero
 
 WORKDIR /var/www/html

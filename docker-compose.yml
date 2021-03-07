@@ -39,9 +39,6 @@ services:
     build:
       context: src/service_a
       dockerfile: docker/Dockerfile
-      args:
-        - PUID=${PUID}
-        - PGID=${PGID}
     depends_on:
       - kafka
     networks:
@@ -51,9 +48,6 @@ services:
     build:
       context: src/service_b
       dockerfile: docker/Dockerfile
-      args:
-        - PUID=${PUID}
-        - PGID=${PGID}
     depends_on:
       - kafka
     networks:
@@ -63,9 +57,6 @@ services:
     build:
       context: src/broker
       dockerfile: docker/Dockerfile
-      args:
-        - PUID=${PUID}
-        - PGID=${PGID}
     depends_on:
       - kafka
       - db
@@ -76,9 +67,6 @@ services:
     build:
       context: src/requester
       dockerfile: docker/Dockerfile
-      args:
-        - PUID=${PUID}
-        - PGID=${PGID}
     depends_on:
       - broker
       - nginx
