@@ -53,6 +53,14 @@ class RequestRepository implements RepositoryInterface
         }
     }
 
+    /**
+     * @todo :: send event on update
+     *
+     * @param int $id
+     * @param string $message
+     * @param bool $isComplete
+     * @return bool
+     */
     public function updateRequest(int $id, string $message, bool $isComplete = false): bool
     {
         $qb = $this->connection->createQueryBuilder();

@@ -9,6 +9,7 @@ use App\Consumer\ConsumerInterface;
 use App\Producer\Producer;
 use App\Producer\ProducerInterface;
 use RdKafka\Conf;
+use RdKafka\ConsumerTopic;
 use RdKafka\Producer as VendorProducer;
 use RdKafka\TopicConf;
 
@@ -26,7 +27,7 @@ class KafkaFactory
         return new Producer($rdKafkaProducer, $topics);
     }
 
-    public static function createConsumer(array $config, string $consumerName): ConsumerInterface
+    public static function createConsumerTopic(array $config, string $consumerName): ConsumerTopic
     {
         $consumerRawConf = $config['consumers'][$consumerName];
         $consumerConf =new Conf();
@@ -37,8 +38,7 @@ class KafkaFactory
         $topicConf->set('auto.commit.interval.ms', $consumerRawConf['auto_commit_timeout']);
         $topicConf->set('offset.store.method', $consumerRawConf['offset_store_method']);
         $topicConf->set('auto.offset.reset', $consumerRawConf['auto_reset_offset']);
-        $consumerTopic = (new \RdKafka\Consumer($consumerConf))->newTopic($consumerRawConf['topic'], $topicConf);
 
-        return new Consumer($consumerTopic);
+        return (new \RdKafka\Consumer($consumerConf))->newTopic($consumerRawConf['topic'], $topicConf);
     }
 }

@@ -8,7 +8,7 @@ $app = App\App::make();
 
 $handler = CommandHandler::make($app->getContainer());
 if ($argc < 2) {
-    $handler->handle('list', $argv);
+    $handler->handle(\App\Command\ListCommand::getCommandName());
     return;
 }
 

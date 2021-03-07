@@ -40,3 +40,9 @@ $producer = $app->getContainer()->get('producerA');
 $message = new \App\Model\Kafka\SimpleMessage(123, 'Text');
 $producer->publish($message);
 ```
+
+## Ideas
+
+* Move common abstractions to the separate library. Or maybe, create micro framework
+* \SplObserver and \SplSubject for internal events
+* Events on request table record update 

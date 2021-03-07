@@ -1,18 +1,23 @@
 <?php
 
-use App\Command\RunConsumerA;
-use App\Command\RunConsumerB;
-use App\Factory\DbConnectionFactory;
-use App\Factory\KafkaFactory;
+use App\Command;
+use App\Consumer;
+use App\Factory;
 use App\Repository\RequestRepository;
 
 return [
-    'producerA' => DI\factory([KafkaFactory::class, 'createProducer'])->parameter('config', DI\get('kafka'))->parameter('producerName', 'producerA'),
-    'producerB' => DI\factory([KafkaFactory::class, 'createProducer'])->parameter('config', DI\get('kafka'))->parameter('producerName', 'producerB'),
-    'consumerA' => DI\factory([KafkaFactory::class, 'createConsumer'])->parameter('config', DI\get('kafka'))->parameter('consumerName', 'consumerRevA'),
-    'consumerB' => DI\factory([KafkaFactory::class, 'createConsumer'])->parameter('config', DI\get('kafka'))->parameter('consumerName', 'consumerRevB'),
-    'db.connection' => DI\factory([DbConnectionFactory::class, 'create'])->parameter('config', DI\get('database')),
     RequestRepository::class => DI\autowire()->constructor(DI\get('db.connection')),
-    RunConsumerA::class => DI\autowire()->constructor(DI\get('consumerA')),
-    RunConsumerB::class => DI\autowire()->constructor(DI\get('consumerB')),
+    'producerA' => DI\factory([Factory\KafkaFactory::class, 'createProducer'])->parameter('config', DI\get('kafka'))->parameter('producerName', 'producerA'),
+    'producerB' => DI\factory([Factory\KafkaFactory::class, 'createProducer'])->parameter('config', DI\get('kafka'))->parameter('producerName', 'producerB'),
+    'consumerA' => DI\create(Consumer\ConsumerA::class)->constructor(
+        DI\factory([Factory\KafkaFactory::class, 'createConsumerTopic'])->parameter('config', DI\get('kafka'))->parameter('consumerName', 'consumerRevA'),
+        DI\get('producerB')
+    ),
+    'consumerB' => DI\create(Consumer\ConsumerB::class)->constructor(
+        DI\factory([Factory\KafkaFactory::class, 'createConsumerTopic'])->parameter('config', DI\get('kafka'))->parameter('consumerName', 'consumerRevA'),
+        DI\get(RequestRepository::class)
+    ),
+    'db.connection' => DI\factory([Factory\DbConnectionFactory::class, 'create'])->parameter('config', DI\get('database')),
+    Command\RunConsumerA::class => DI\autowire()->constructor(DI\get('consumerA')),
+    Command\RunConsumerB::class => DI\autowire()->constructor(DI\get('consumerB')),
 ];

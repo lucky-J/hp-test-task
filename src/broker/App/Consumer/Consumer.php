@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Consumer;
 
 use App\Exception\RdKafkaRuntimeException;
+use App\Model\Kafka\MessageInterface;
 use App\Model\Kafka\SimpleMessage;
 use RdKafka\ConsumerTopic;
 use Throwable;
 
-class Consumer implements ConsumerInterface
+abstract class Consumer implements ConsumerInterface
 {
     private ConsumerTopic $consumerTopic;
 
@@ -30,12 +31,12 @@ class Consumer implements ConsumerInterface
                     continue;
                 }
 
-                $simpleMessage = new SimpleMessage($arr['id'], $arr['message']);
-
-                echo $simpleMessage->getMessage(). PHP_EOL;
+                $this->onConsume(new SimpleMessage($arr['id'], $arr['message']));
             }
         } catch (Throwable $exception) {
             throw new RdKafkaRuntimeException('Consuming failed', 500, $exception);
         }
     }
+
+    abstract function onConsume(MessageInterface $message): void;
 }
